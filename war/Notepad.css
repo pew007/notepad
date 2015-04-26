@@ -6,29 +6,32 @@ h1 {
   font-size: 2em;
   font-weight: bold;
   color: #777777;
-  margin: 40px 0px 70px;
+  margin: 40px 0 70px;
   text-align: center;
 }
 
-.sendButton {
+.loginButton {
   display: block;
   font-size: 16pt;
 }
 
 /** Most GWT widgets already have a style name defined */
-.gwt-DialogBox {
-  width: 400px;
-}
-
-.dialogVPanel {
-  margin: 5px;
-}
-
 .serverResponseLabelError {
   color: red;
 }
 
-/** Set ids using widget.getElement().setId("idOfElement") */
-#closeButton {
-  margin: 15px 6px 6px;
+noscript div {
+  width: 22em;
+  position: absolute;
+  left: 50%;
+  margin-left: -11em;
+  color: red;
+  background-color: white;
+  border: 1px solid red;
+  padding: 4px;
+  font-family: sans-serif;
+}
+
+.errorLabelContainer {
+  color: red;
 }
