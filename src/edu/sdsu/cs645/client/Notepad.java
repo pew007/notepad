@@ -1,7 +1,6 @@
 package edu.sdsu.cs645.client;
 
 import com.google.gwt.event.dom.client.*;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
@@ -17,17 +16,21 @@ public class Notepad implements EntryPoint {
 
     private final NotepadServiceAsync notepadService = GWT.create(NotepadService.class);
 
-    private Button loginButton = new Button("Login");
-    private TextBox passwordField = new PasswordTextBox();
-    private Label errorLabel = new Label();
-
     public void onModuleLoad() {
+        createLoginPanel();
+    }
 
-        loginButton.addStyleName("loginButton");
+    private void createLoginPanel() {
+        final FlowPanel loginPanel = new FlowPanel();
+        final Button loginButton = new Button("Login");
+        final TextBox passwordField = new PasswordTextBox();
 
-        RootPanel.get("passwordFieldContainer").add(passwordField);
-        RootPanel.get("loginButtonContainer").add(loginButton);
-        RootPanel.get("errorLabelContainer").add(errorLabel);
+        loginPanel.addStyleName("loginPanel");
+
+        loginPanel.add(passwordField);
+        loginPanel.add(loginButton);
+
+        RootPanel.get().add(loginPanel);
 
         passwordField.setFocus(true);
         passwordField.selectAll();
@@ -35,22 +38,22 @@ public class Notepad implements EntryPoint {
         passwordField.addKeyUpHandler(new KeyUpHandler() {
             public void onKeyUp(KeyUpEvent keyUpEvent) {
                 if (keyUpEvent.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
-                    authenticateUser();
-                    Window.Location.replace("/notepad.html");
+                    authenticateUser(passwordField.getText());
                 }
             }
         });
 
         loginButton.addClickHandler(new ClickHandler() {
             public void onClick(ClickEvent clickEvent) {
-                authenticateUser();
+                authenticateUser(passwordField.getText());
             }
         });
     }
 
-    private void authenticateUser() {
+    private void authenticateUser(String password) {
+        Label errorLabel = new Label();
         errorLabel.setText("");
-        String password = passwordField.getText();
+
         if (!FieldVerifier.isValidPassword(password)) {
             errorLabel.setText("Invalid password. Please try again.");
         }
