@@ -1,26 +1,16 @@
-/** Add css rules here for your application. */
+html {
+  padding: 0 150px 150px 150px;
+  font-family: 'Arial', sans-serif;
+}
 
-
-/** Example rules used by the template application (remove for your app) */
 h1 {
   font-size: 2em;
   font-weight: bold;
   color: #777777;
-  margin: 40px 0 70px;
+  margin: 40px 0;
   text-align: center;
 }
 
-.loginPanel {
-  display: block;
-  text-align: center;
-}
-
-.loginButton {
-  display: block;
-  font-size: 16pt;
-}
-
-/** Most GWT widgets already have a style name defined */
 .serverResponseLabelError {
   color: red;
 }
@@ -37,6 +27,24 @@ noscript div {
   font-family: sans-serif;
 }
 
-.errorLabelContainer {
+.errorLabel {
   color: red;
+}
+
+.loginPanel {
+  display: block;
+  text-align: center;
+}
+
+.loginButton {
+  display: block;
+  font-size: 16pt;
+}
+
+.notepadPanel {
+  width: 80%;
+}
+
+.editor {
+
 }
