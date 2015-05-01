@@ -1,6 +1,7 @@
 package edu.sdsu.cs645.client;
 
 import com.google.gwt.event.dom.client.*;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
@@ -68,14 +69,21 @@ public class Notepad implements EntryPoint {
     }
 
     private void authenticateUser() {
-        errorLabel.setText("");
+        AsyncCallback callback = new AsyncCallback() {
+            public void onSuccess(Object response) {
+                errorLabel.setText("");
+                if (response.equals("Error")) {
+                    errorLabel.setText("Invalid password. Please try again.");
+                } else {
+                    removeLoginPanel();
+                    createNotepadPanel();
+                }
+            }
 
-        if (!FieldVerifier.isValidPassword(passwordField.getText())) {
-            errorLabel.setText("Invalid password. Please try again.");
-        } else {
-            removeLoginPanel();
-            createNotepadPanel();
-        }
+            public void onFailure(Throwable throwable) {}
+        };
+
+        notepadService.authenticate(passwordField.getText(), callback);
     }
 
     private void removeLoginPanel() {
@@ -96,5 +104,29 @@ public class Notepad implements EntryPoint {
 
         RootPanel.get().add(notepadPanel);
         RootPanel.get().add(buttonPanel);
+
+        saveButton.addClickHandler(new ClickHandler() {
+            public void onClick(ClickEvent clickEvent) {
+                String content = editor.getText();
+                save(content);
+            }
+        });
+    }
+
+    private void save(String content) {
+        AsyncCallback callback = new AsyncCallback() {
+            @Override
+            public void onFailure(Throwable throwable) {
+                errorLabel.setText(throwable.getMessage());
+            }
+
+            @Override
+            public void onSuccess(Object o) {
+                String response = (String) o;
+                errorLabel.setText(response);
+            }
+        };
+
+        notepadService.save(content, callback);
     }
 }
