@@ -5,7 +5,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
-import edu.sdsu.cs645.shared.FieldVerifier;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 
@@ -25,6 +24,9 @@ public class Notepad implements EntryPoint {
     private FlowPanel notepadPanel = new FlowPanel();
     private FlowPanel buttonPanel = new FlowPanel();
 
+    private RichTextArea editor = new RichTextArea();
+    private PopupPanel popupPanel = new PopupPanel();
+
     public void onModuleLoad() {
         createHeader();
         createLoginPanel();
@@ -43,6 +45,7 @@ public class Notepad implements EntryPoint {
 
         loginPanel.addStyleName("loginPanel");
         errorLabel.addStyleName("errorLabel");
+        loginButton.addStyleName("loginButton");
 
         loginPanel.add(passwordField);
         loginPanel.add(loginButton);
@@ -50,6 +53,7 @@ public class Notepad implements EntryPoint {
 
         RootPanel.get().add(loginPanel);
 
+        passwordField.getElement().setPropertyString("placeholder", "Password");
         passwordField.setFocus(true);
         passwordField.selectAll();
 
@@ -69,8 +73,8 @@ public class Notepad implements EntryPoint {
     }
 
     private void authenticateUser() {
-        AsyncCallback callback = new AsyncCallback() {
-            public void onSuccess(Object response) {
+        AsyncCallback<String> callback = new AsyncCallback<String>() {
+            public void onSuccess(String response) {
                 errorLabel.setText("");
                 if (response.equals("Error")) {
                     errorLabel.setText("Invalid password. Please try again.");
@@ -93,10 +97,10 @@ public class Notepad implements EntryPoint {
     private void createNotepadPanel() {
         final Button saveButton = new Button("Save");
         final Button loadButton = new Button("Load");
-        final RichTextArea editor = new RichTextArea();
 
         notepadPanel.addStyleName("notepadPanel");
         editor.addStyleName("editor");
+        buttonPanel.addStyleName("buttonPanel");
 
         buttonPanel.add(saveButton);
         buttonPanel.add(loadButton);
@@ -111,22 +115,43 @@ public class Notepad implements EntryPoint {
                 save(content);
             }
         });
+
+        loadButton.addClickHandler(new ClickHandler() {
+            public void onClick(ClickEvent clickEvent) {
+                load();
+            }
+        });
     }
 
     private void save(String content) {
-        AsyncCallback callback = new AsyncCallback() {
+        AsyncCallback<String> callback = new AsyncCallback<String>() {
             @Override
             public void onFailure(Throwable throwable) {
                 errorLabel.setText(throwable.getMessage());
             }
 
             @Override
-            public void onSuccess(Object o) {
-                String response = (String) o;
+            public void onSuccess(String response) {
                 errorLabel.setText(response);
             }
         };
 
         notepadService.save(content, callback);
+    }
+
+    private void load() {
+        AsyncCallback<String> callback = new AsyncCallback<String>() {
+            @Override
+            public void onFailure(Throwable throwable) {
+                errorLabel.setText(throwable.getMessage());
+            }
+
+            @Override
+            public void onSuccess(String response) {
+                editor.setHTML(response);
+            }
+        };
+
+        notepadService.load(callback);
     }
 }

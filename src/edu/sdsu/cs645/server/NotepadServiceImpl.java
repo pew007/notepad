@@ -17,7 +17,7 @@ public class NotepadServiceImpl extends RemoteServiceServlet implements NotepadS
     }
 
     @Override
-    public String save(String content) throws IllegalArgumentException {
+    public synchronized String save(String content) throws IllegalArgumentException {
         String path = getServletContext().getRealPath("/");
 //        String filename = path + "/data.txt";
         String filename = "/Users/pwang/CS645/Notepad/data.txt";
@@ -31,26 +31,27 @@ public class NotepadServiceImpl extends RemoteServiceServlet implements NotepadS
             return "Failed to save file";
         }
 
-        return "OK, document saved.";
+        return "Note saved!";
     }
 
     @Override
     public String load() throws IllegalArgumentException {
         String path = getServletContext().getRealPath("/");
-        String filename = path + "/data/txt";
-        String answer = "";
+//        String filename = path + "/data.txt";
+        String filename = "/Users/pwang/CS645/Notepad/data.txt";
+        String response = "";
         String line;
 
         try {
             BufferedReader in = new BufferedReader(new FileReader(filename));
             while ((line = in.readLine()) != null) {
-                answer += line;
-                in.close();
+                response += line;
             }
+            in.close();
         } catch (Exception e) {
             return "Failed to read file.";
         }
 
-        return answer;
+        return response;
     }
 }
