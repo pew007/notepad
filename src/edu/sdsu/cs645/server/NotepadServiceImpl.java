@@ -10,7 +10,6 @@ import java.io.PrintWriter;
 
 @SuppressWarnings("serial")
 public class NotepadServiceImpl extends RemoteServiceServlet implements NotepadService {
-
     @Override
     public String authenticate(String password) throws IllegalArgumentException {
         return password.trim().equals("sp2015") ? "OK" : "Error";
@@ -27,10 +26,10 @@ public class NotepadServiceImpl extends RemoteServiceServlet implements NotepadS
             out.print(content);
             out.close();
         } catch (Exception e) {
-            return "Failed to save file";
+            return "Failed to save file. " + e.getMessage();
         }
 
-        return "Note saved!";
+        return "Saved!";
     }
 
     @Override
@@ -47,7 +46,7 @@ public class NotepadServiceImpl extends RemoteServiceServlet implements NotepadS
             }
             in.close();
         } catch (Exception e) {
-            return "Failed to read file.";
+            return "Failed to read file. " + e.getMessage();
         }
 
         return response;

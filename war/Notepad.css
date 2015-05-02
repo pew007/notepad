@@ -52,7 +52,7 @@ noscript div {
 
 .notepadPanel {
   width: 100%;
-  height: 300px;
+  height: 450px;
 }
 
 .editor {
@@ -69,4 +69,16 @@ noscript div {
 .buttonPanel {
   margin-top: 20px;
   text-align: right;
+}
+
+.gwt-PopupPanel {
+  height: 100px;
+  width: 200px;
+  text-align: center;
+  font-size: 2em;
+  border: none !important;
+}
+
+.gwt-Label {
+  color: #AAAAAA;
 }

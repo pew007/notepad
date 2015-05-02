@@ -2,6 +2,7 @@ package edu.sdsu.cs645.client;
 
 import com.google.gwt.event.dom.client.*;
 import com.google.gwt.event.logical.shared.AttachEvent;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
 import com.google.gwt.user.client.ui.Button;
@@ -10,10 +11,6 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 
 public class Notepad implements EntryPoint {
-
-    private static final String SERVER_ERROR = "An error occurred while "
-            + "attempting to contact the server. Please check your network "
-            + "connection and try again.";
 
     private final NotepadServiceAsync notepadService = GWT.create(NotepadService.class);
 
@@ -26,7 +23,7 @@ public class Notepad implements EntryPoint {
     private FlowPanel buttonPanel = new FlowPanel();
 
     private RichTextArea editor = new RichTextArea();
-    private PopupPanel popupPanel = new PopupPanel();
+    private PopupPanel popupPanel = new PopupPanel(true, false);
 
     public void onModuleLoad() {
         createHeader();
@@ -51,14 +48,6 @@ public class Notepad implements EntryPoint {
         loginPanel.add(passwordField);
         loginPanel.add(loginButton);
         loginPanel.add(errorLabel);
-
-        loginPanel.addAttachHandler(new AttachEvent.Handler() {
-            public void onAttachOrDetach(AttachEvent attachEvent) {
-                if (attachEvent.isAttached()) {
-                    checkForUpdate();
-                }
-            }
-        });
 
         RootPanel.get().add(loginPanel);
 
@@ -119,12 +108,20 @@ public class Notepad implements EntryPoint {
         buttonPanel.add(loadButton);
         notepadPanel.add(editor);
 
+        notepadPanel.addAttachHandler(new AttachEvent.Handler() {
+            public void onAttachOrDetach(AttachEvent attachEvent) {
+                if (attachEvent.isAttached()) {
+                    checkForUpdate();
+                }
+            }
+        });
+
         RootPanel.get().add(notepadPanel);
         RootPanel.get().add(buttonPanel);
 
         saveButton.addClickHandler(new ClickHandler() {
             public void onClick(ClickEvent clickEvent) {
-                String content = editor.getText();
+                String content = editor.getHTML();
                 save(content);
             }
         });
@@ -140,12 +137,12 @@ public class Notepad implements EntryPoint {
         AsyncCallback<String> callback = new AsyncCallback<String>() {
             @Override
             public void onFailure(Throwable throwable) {
-                errorLabel.setText(throwable.getMessage());
+                showPopupAlert(throwable.getMessage());
             }
 
             @Override
             public void onSuccess(String response) {
-                errorLabel.setText(response);
+                showPopupAlert(response);
             }
         };
 
@@ -156,15 +153,32 @@ public class Notepad implements EntryPoint {
         AsyncCallback<String> callback = new AsyncCallback<String>() {
             @Override
             public void onFailure(Throwable throwable) {
-                errorLabel.setText(throwable.getMessage());
+                showPopupAlert(throwable.getMessage());
             }
 
             @Override
             public void onSuccess(String response) {
                 editor.setHTML(response);
+                showPopupAlert("Loaded!");
             }
         };
 
         notepadService.load(callback);
+    }
+
+    private void showPopupAlert(String message) {
+        popupPanel.setWidget(new Label(message));
+        popupPanel.center();
+        popupPanel.show();
+        Timer timer = new Timer()
+        {
+            @Override
+            public void run()
+            {
+                popupPanel.hide();
+            }
+        };
+
+        timer.schedule(1000);
     }
 }
