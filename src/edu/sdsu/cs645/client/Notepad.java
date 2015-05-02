@@ -1,6 +1,7 @@
 package edu.sdsu.cs645.client;
 
 import com.google.gwt.event.dom.client.*;
+import com.google.gwt.event.logical.shared.AttachEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
 import com.google.gwt.user.client.ui.Button;
@@ -51,6 +52,14 @@ public class Notepad implements EntryPoint {
         loginPanel.add(loginButton);
         loginPanel.add(errorLabel);
 
+        loginPanel.addAttachHandler(new AttachEvent.Handler() {
+            public void onAttachOrDetach(AttachEvent attachEvent) {
+                if (attachEvent.isAttached()) {
+                    checkForUpdate();
+                }
+            }
+        });
+
         RootPanel.get().add(loginPanel);
 
         passwordField.getElement().setPropertyString("placeholder", "Password");
@@ -92,6 +101,10 @@ public class Notepad implements EntryPoint {
 
     private void removeLoginPanel() {
         RootPanel.get().remove(loginPanel);
+    }
+
+    private void checkForUpdate() {
+        load();
     }
 
     private void createNotepadPanel() {
