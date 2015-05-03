@@ -43,7 +43,7 @@ public class RichTextToolbar extends Composite {
      * Local CONSTANTS *
      */
     //ImageMap and CSS related
-    private static final String HTTP_STATIC_ICONS_GIF = "http://i.imgur.com/YYUwNPN.gif";
+    private static final String HTTP_STATIC_ICONS_GIF = "/images/bold.gif";
     private static final String CSS_ROOT_NAME = "RichTextToolbar";
 
     //Color and Fontlists - First Value (key) is the Name to display, Second Value (value) is the HTML-Definition
@@ -120,6 +120,10 @@ public class RichTextToolbar extends Composite {
     private static final String GUI_HOVERTEXT_UNDERLINE = "Underline";
     private static final String GUI_HOVERTEXT_ITALIC = "Italic";
     private static final String GUI_HOVERTEXT_BOLD = "Bold";
+
+    private static final String ICON_BOLD = "/images/bold.gif";
+    private static final String ICON_ITALIC = "/images/italic.gif";
+    private static final String ICON_UNDERLINE = "/images/underline.gif";
 
     /**
      * Private Variables *
@@ -429,9 +433,9 @@ public class RichTextToolbar extends Composite {
      */
     private void buildTools() {
         //Init the TOP Panel forst
-        topPanel.add(bold = createToggleButton(HTTP_STATIC_ICONS_GIF, 0, 0, 20, 20, GUI_HOVERTEXT_BOLD));
-        topPanel.add(italic = createToggleButton(HTTP_STATIC_ICONS_GIF, 0, 60, 20, 20, GUI_HOVERTEXT_ITALIC));
-        topPanel.add(underline = createToggleButton(HTTP_STATIC_ICONS_GIF, 0, 140, 20, 20, GUI_HOVERTEXT_UNDERLINE));
+        topPanel.add(bold = createToggleButton(ICON_BOLD, 0, 0, 20, 20, GUI_HOVERTEXT_BOLD));
+        topPanel.add(italic = createToggleButton(ICON_ITALIC, 0, 60, 20, 20, GUI_HOVERTEXT_ITALIC));
+        topPanel.add(underline = createToggleButton(ICON_UNDERLINE, 0, 140, 20, 20, GUI_HOVERTEXT_UNDERLINE));
         topPanel.add(stroke = createToggleButton(HTTP_STATIC_ICONS_GIF, 0, 120, 20, 20, GUI_HOVERTEXT_STROKE));
         topPanel.add(new HTML("&nbsp;"));
         topPanel.add(subscript = createToggleButton(HTTP_STATIC_ICONS_GIF, 0, 600, 20, 20, GUI_HOVERTEXT_SUBSCRIPT));
@@ -443,8 +447,8 @@ public class RichTextToolbar extends Composite {
         topPanel.add(new HTML("&nbsp;"));
         topPanel.add(orderlist = createPushButton(HTTP_STATIC_ICONS_GIF, 0, 80, 20, 20, GUI_HOVERTEXT_ORDERLIST));
         topPanel.add(unorderlist = createPushButton(HTTP_STATIC_ICONS_GIF, 0, 20, 20, 20, GUI_HOVERTEXT_UNORDERLIST));
-        topPanel.add(indentright = createPushButton(HTTP_STATIC_ICONS_GIF, 0, 400, 20, 20, GUI_HOVERTEXT_IDENTRIGHT));
-        topPanel.add(indentleft = createPushButton(HTTP_STATIC_ICONS_GIF, 0, 540, 20, 20, GUI_HOVERTEXT_IDENTLEFT));
+//        topPanel.add(indentright = createPushButton(HTTP_STATIC_ICONS_GIF, 0, 400, 20, 20, GUI_HOVERTEXT_IDENTRIGHT));
+//        topPanel.add(indentleft = createPushButton(HTTP_STATIC_ICONS_GIF, 0, 540, 20, 20, GUI_HOVERTEXT_IDENTLEFT));
         topPanel.add(new HTML("&nbsp;"));
         topPanel.add(generatelink = createPushButton(HTTP_STATIC_ICONS_GIF, 0, 500, 20, 20, GUI_HOVERTEXT_LINK));
         topPanel.add(breaklink = createPushButton(HTTP_STATIC_ICONS_GIF, 0, 640, 20, 20, GUI_HOVERTEXT_BREAKLINK));
@@ -481,7 +485,7 @@ public class RichTextToolbar extends Composite {
      * Method to create a Push button for the toolbar *
      */
     private PushButton createPushButton(String url, Integer top, Integer left, Integer width, Integer height, String tip) {
-        Image extract = new Image(url, left, top, width, height);
+        Image extract = new Image(url);
         PushButton tb = new PushButton(extract);
         tb.setHeight(height + "px");
         tb.setWidth(width + "px");
