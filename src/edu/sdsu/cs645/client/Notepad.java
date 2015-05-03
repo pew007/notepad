@@ -23,6 +23,8 @@ public class Notepad implements EntryPoint {
     private FlowPanel buttonPanel = new FlowPanel();
 
     private RichTextArea editor = new RichTextArea();
+    private RichTextToolbar toolbar = new RichTextToolbar(editor);
+
     private PopupPanel popupPanel = new PopupPanel(true, false);
 
     public void onModuleLoad() {
@@ -106,6 +108,7 @@ public class Notepad implements EntryPoint {
 
         buttonPanel.add(saveButton);
         buttonPanel.add(loadButton);
+        notepadPanel.add(toolbar);
         notepadPanel.add(editor);
 
         notepadPanel.addAttachHandler(new AttachEvent.Handler() {

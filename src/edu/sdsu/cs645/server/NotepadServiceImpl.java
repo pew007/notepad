@@ -18,8 +18,8 @@ public class NotepadServiceImpl extends RemoteServiceServlet implements NotepadS
     @Override
     public synchronized String save(String content) throws IllegalArgumentException {
         String path = getServletContext().getRealPath("/");
-        String filename = path + "/data.txt";
-
+//        String filename = path + "/data.txt";
+        String filename = "/Users/pwang/CS645/Notepad/data.txt";
         try {
             PrintWriter out = new PrintWriter(new FileWriter(filename));
             content = content.replace("\r\n|\n", "<br />");
@@ -35,7 +35,8 @@ public class NotepadServiceImpl extends RemoteServiceServlet implements NotepadS
     @Override
     public String load() throws IllegalArgumentException {
         String path = getServletContext().getRealPath("/");
-        String filename = path + "/data.txt";
+//        String filename = path + "/data.txt";
+        String filename = "/Users/pwang/CS645/Notepad/data.txt";
         String response = "";
         String line;
 

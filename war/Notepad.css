@@ -1,6 +1,7 @@
 html {
   padding: 0 150px 150px 150px;
   font-family: 'Arial', sans-serif;
+  min-width: 960px;
 }
 
 h1 {
@@ -59,7 +60,7 @@ noscript div {
   display: block;
   margin: 0 auto;
   width: 100%;
-  height: 100%;
+  height: 80%;
   border: 2px solid #AAAAAA !important;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
@@ -82,3 +83,72 @@ noscript div {
 .gwt-Label {
   color: #AAAAAA;
 }
+
+/* Toolbar */
+.RichTextToolbar {
+  background: #E2E2E2;
+  padding:5px;
+  margin:0;
+  height: 20%;
+}
+
+.RichTextToolbar .gwt-ToggleButton {
+  background: #F4F4F4;
+  border: 1px outset #ccc;
+}
+
+.RichTextToolbar .gwt-PushButton {
+  background: #F4F4F4;
+  border: 1px outset #ccc;
+}
+
+.RichTextToolbar .gwt-ToggleButton-up-hovering {
+  background: #F4F4F4;
+  border-color: #9cf #69e #69e #7af;
+}
+
+.RichTextToolbar .gwt-PushButton-up-hovering {
+  background: #F4F4F4;
+  border-color: #9cf #69e #69e #7af;
+}
+
+.RichTextToolbar .gwt-ToggleButton-down {
+  background: #D5D5D5;
+  border-color: #777777 #777777 #777777 #777777;
+}
+
+.RichTextToolbar .gwt-PushButton-down {
+  background: #D5D5D5;
+  border-color: #777777 #777777 #777777 #777777;
+}
+
+.RichTextToolbar .gwt-ToggleButton-down-hovering {
+  background: #D5D5D5;
+  border-color: #9cf #69e #69e #7af;
+}
+
+.RichTextToolbar .gwt-PushButton-down-hovering {
+  background: #D5D5D5;
+  border-color: #9cf #69e #69e #7af;
+}
+
+.RichTextToolbar .gwt-PushButton-up-disabled {
+  background: #717171;
+  border-color: #B9968F #B9968F #B9968F #B9968F;
+}
+
+.RichTextToolbar .gwt-PushButton-down-disabled {
+  background: #717171;
+  border-color: #B9968F #B9968F #B9968F #B9968F;
+}
+
+.RichTextToolbar .gwt-ToggleButton-up-disabled {
+  background: #717171;
+  border-color: #B9968F #B9968F #B9968F #B9968F;
+}
+
+.RichTextToolbar .gwt-ToggleButton-down-disabled {
+  background: #717171;
+  border-color: #B9968F #B9968F #B9968F #B9968F;
+}
+
