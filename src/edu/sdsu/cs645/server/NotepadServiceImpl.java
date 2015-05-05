@@ -2,6 +2,7 @@ package edu.sdsu.cs645.server;
 
 import edu.sdsu.cs645.client.NotepadService;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import edu.sdsu.cs645.shared.Note;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -16,40 +17,47 @@ public class NotepadServiceImpl extends RemoteServiceServlet implements NotepadS
     }
 
     @Override
-    public synchronized String save(String content) throws IllegalArgumentException {
+    public synchronized Note save(String content) throws IllegalArgumentException {
         String path = getServletContext().getRealPath("/");
-        String filename = path + "/data.txt";
-//        String filename = "/Users/pwang/CS645/Notepad/data.txt";
-        try {
-            PrintWriter out = new PrintWriter(new FileWriter(filename));
-            content = content.replace("\r\n|\n", "<br />");
-            out.print(content);
-            out.close();
-        } catch (Exception e) {
-            return "Failed to save file. " + e.getMessage();
-        }
+//        String filename = path + "/data.txt";
+        String filename = "/Users/pwang/CS645/Notepad/data.txt";
 
-        return "Saved!";
+        Note note = Note.getInstance();
+        note.setContent(content);
+        note.updateLastModified();
+
+//        try {
+//            PrintWriter out = new PrintWriter(new FileWriter(filename));
+//            content = content.replace("\r\n|\n", "<br />");
+//            out.print(content);
+//            out.close();
+//        } catch (Exception e) {
+//
+//        }
+
+        return note;
     }
 
     @Override
-    public String load() throws IllegalArgumentException {
+    public Note load() throws IllegalArgumentException {
         String path = getServletContext().getRealPath("/");
-        String filename = path + "/data.txt";
-//        String filename = "/Users/pwang/CS645/Notepad/data.txt";
+//        String filename = path + "/data.txt";
+        String filename = "/Users/pwang/CS645/Notepad/data.txt";
         String response = "";
         String line;
 
-        try {
-            BufferedReader in = new BufferedReader(new FileReader(filename));
-            while ((line = in.readLine()) != null) {
-                response += line;
-            }
-            in.close();
-        } catch (Exception e) {
-            return "Failed to read file. " + e.getMessage();
-        }
+        Note note = Note.getInstance();
 
-        return response;
+//        try {
+//            BufferedReader in = new BufferedReader(new FileReader(filename));
+//            while ((line = in.readLine()) != null) {
+//                response += line;
+//            }
+//            in.close();
+//        } catch (Exception e) {
+//            return "Failed to read file. " + e.getMessage();
+//        }
+
+        return note;
     }
 }

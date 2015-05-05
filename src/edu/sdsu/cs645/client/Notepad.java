@@ -9,6 +9,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import edu.sdsu.cs645.shared.Note;
 
 public class Notepad implements EntryPoint {
 
@@ -137,15 +138,15 @@ public class Notepad implements EntryPoint {
     }
 
     private void save(String content) {
-        AsyncCallback<String> callback = new AsyncCallback<String>() {
+        AsyncCallback<Note> callback = new AsyncCallback<Note>() {
             @Override
             public void onFailure(Throwable throwable) {
                 showPopupAlert(throwable.getMessage());
             }
 
             @Override
-            public void onSuccess(String response) {
-                showPopupAlert(response);
+            public void onSuccess(Note response) {
+                showPopupAlert("Saved!");
             }
         };
 
@@ -153,15 +154,15 @@ public class Notepad implements EntryPoint {
     }
 
     private void load() {
-        AsyncCallback<String> callback = new AsyncCallback<String>() {
+        AsyncCallback<Note> callback = new AsyncCallback<Note>() {
             @Override
             public void onFailure(Throwable throwable) {
                 showPopupAlert(throwable.getMessage());
             }
 
             @Override
-            public void onSuccess(String response) {
-                editor.setHTML(response);
+            public void onSuccess(Note response) {
+                editor.setHTML(response.getContent());
                 showPopupAlert("Loaded!");
             }
         };
