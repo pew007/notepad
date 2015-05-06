@@ -4,10 +4,7 @@ import edu.sdsu.cs645.client.NotepadService;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import edu.sdsu.cs645.shared.Note;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.PrintWriter;
+import java.io.*;
 
 @SuppressWarnings("serial")
 public class NotepadServiceImpl extends RemoteServiceServlet implements NotepadService {

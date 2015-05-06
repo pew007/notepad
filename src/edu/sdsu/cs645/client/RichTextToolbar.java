@@ -115,24 +115,24 @@ public class RichTextToolbar extends Composite {
     private static final String GUI_HOVERTEXT_ITALIC = "Italic";
     private static final String GUI_HOVERTEXT_BOLD = "Bold";
 
-    private static final String ICON_BOLD = "/images/bold.gif";
-    private static final String ICON_ITALIC = "/images/italic.gif";
-    private static final String ICON_UNDERLINE = "/images/underline.gif";
-    private static final String ICON_STRIKE_THROUGH = "/images/strikeThrough.gif";
-    private static final String ICON_SUBSCRIPT = "/images/subscript.gif";
-    private static final String ICON_SUPERSCRIPT = "/images/superscript.gif";
-    private static final String ICON_REMOVE_FORMAT = "/images/removeFormat.gif";
-    private static final String ICON_ALIGN_LEFT = "/images/justifyLeft.gif";
-    private static final String ICON_ALIGN_CENTER = "/images/justifyCenter.gif";
-    private static final String ICON_ALIGN_RIGHT = "/images/justifyRight.gif";
-    private static final String ICON_ORDERED_LIST = "/images/ol.gif";
-    private static final String ICON_UNORDERED_LIST = "/images/ul.gif";
-    private static final String ICON_INDENT_RIGHT = "/images/indent.gif";
-    private static final String ICON_INDENT_LEFT = "/images/outdent.gif";
-    private static final String ICON_CREATE_LINK = "/images/createLink.gif";
-    private static final String ICON_REMOVE_LINK = "/images/removeLink.gif";
-    private static final String ICON_INSERT_IMAGE = "/images/insertImage.gif";
-    private static final String ICON_HORIZONTAL_LINE = "/images/hr.gif";
+    private static final String ICON_BOLD = "/gwt048/images/bold.gif";
+    private static final String ICON_ITALIC = "/gwt048/images/italic.gif";
+    private static final String ICON_UNDERLINE = "/gwt048/images/underline.gif";
+    private static final String ICON_STRIKE_THROUGH = "/gwt048/images/strikeThrough.gif";
+    private static final String ICON_SUBSCRIPT = "/gwt048/images/subscript.gif";
+    private static final String ICON_SUPERSCRIPT = "/gwt048/images/superscript.gif";
+    private static final String ICON_REMOVE_FORMAT = "/gwt048/images/removeFormat.gif";
+    private static final String ICON_ALIGN_LEFT = "/gwt048/images/justifyLeft.gif";
+    private static final String ICON_ALIGN_CENTER = "/gwt048/images/justifyCenter.gif";
+    private static final String ICON_ALIGN_RIGHT = "/gwt048/images/justifyRight.gif";
+    private static final String ICON_ORDERED_LIST = "/gwt048/images/ol.gif";
+    private static final String ICON_UNORDERED_LIST = "/gwt048/images/ul.gif";
+    private static final String ICON_INDENT_RIGHT = "/gwt048/images/indent.gif";
+    private static final String ICON_INDENT_LEFT = "/gwt048/images/outdent.gif";
+    private static final String ICON_CREATE_LINK = "/gwt048/images/createLink.gif";
+    private static final String ICON_REMOVE_LINK = "/gwt048/images/removeLink.gif";
+    private static final String ICON_INSERT_IMAGE = "/gwt048/images/insertImage.gif";
+    private static final String ICON_HORIZONTAL_LINE = "/gwt048/images/hr.gif";
 
     private HorizontalPanel toolbarPanel;
 
