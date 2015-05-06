@@ -132,6 +132,7 @@ public class RichTextToolbar extends Composite {
     private static final String ICON_CREATE_LINK = "/images/createLink.gif";
     private static final String ICON_REMOVE_LINK = "/images/removeLink.gif";
     private static final String ICON_INSERT_IMAGE = "/images/insertImage.gif";
+    private static final String ICON_HORIZONTAL_LINE = "/images/hr.gif";
 
     private HorizontalPanel toolbarPanel;
 
@@ -437,7 +438,7 @@ public class RichTextToolbar extends Composite {
         toolbarPanel.add(generatelink = createPushButton(ICON_CREATE_LINK, 20, 20, GUI_HOVERTEXT_LINK));
         toolbarPanel.add(breaklink = createPushButton(ICON_REMOVE_LINK, 20, 20, GUI_HOVERTEXT_BREAKLINK));
         toolbarPanel.add(new HTML("&nbsp;"));
-        toolbarPanel.add(insertline  = createPushButton(ICON_BOLD, 20, 20, GUI_HOVERTEXT_HLINE));
+        toolbarPanel.add(insertline  = createPushButton(ICON_HORIZONTAL_LINE, 20, 20, GUI_HOVERTEXT_HLINE));
         toolbarPanel.add(insertimage = createPushButton(ICON_INSERT_IMAGE, 20, 20, GUI_HOVERTEXT_IMAGE));
         toolbarPanel.add(new HTML("&nbsp;"));
         toolbarPanel.add(removeformatting = createPushButton(ICON_REMOVE_FORMAT, 20, 20, GUI_HOVERTEXT_REMOVEFORMAT));
