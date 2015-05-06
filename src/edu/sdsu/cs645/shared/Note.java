@@ -1,5 +1,7 @@
 package edu.sdsu.cs645.shared;
 
+import com.google.gwt.i18n.shared.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -34,5 +36,9 @@ public class Note implements Serializable{
 
     public void updateLastModified() {
         this.lastModified = new Date();
+    }
+
+    public String getLastModifiedString() {
+        return lastModified.toString();
     }
 }

@@ -19,14 +19,13 @@ public class Notepad implements EntryPoint {
     private FlowPanel loginPanel = new FlowPanel();
     private Label errorLabel = new Label();
     private PasswordTextBox passwordField = new PasswordTextBox();
-
     private FlowPanel notepadPanel = new FlowPanel();
+    private HorizontalPanel bottomPanel  = new HorizontalPanel();
     private FlowPanel buttonPanel = new FlowPanel();
-
     private RichTextArea editor = new RichTextArea();
     private RichTextToolbar toolbar = new RichTextToolbar(editor);
-
     private PopupPanel popupPanel = new PopupPanel(true, false);
+    private Label timestamp = new Label();
 
     public void onModuleLoad() {
         createHeader();
@@ -105,10 +104,16 @@ public class Notepad implements EntryPoint {
 
         notepadPanel.addStyleName("notepadPanel");
         editor.addStyleName("editor");
+        bottomPanel.addStyleName("bottomPanel");
+        timestamp.addStyleName("timestamp");
         buttonPanel.addStyleName("buttonPanel");
 
         buttonPanel.add(saveButton);
         buttonPanel.add(loadButton);
+
+        bottomPanel.add(timestamp);
+        bottomPanel.add(buttonPanel);
+
         notepadPanel.add(toolbar);
         notepadPanel.add(editor);
 
@@ -121,7 +126,7 @@ public class Notepad implements EntryPoint {
         });
 
         RootPanel.get().add(notepadPanel);
-        RootPanel.get().add(buttonPanel);
+        RootPanel.get().add(bottomPanel);
 
         saveButton.addClickHandler(new ClickHandler() {
             public void onClick(ClickEvent clickEvent) {
@@ -147,6 +152,9 @@ public class Notepad implements EntryPoint {
             @Override
             public void onSuccess(Note response) {
                 showPopupAlert("Saved!");
+                if (response.getLastModified() != null) {
+                    timestamp.setText("Last modified: " + response.getLastModifiedString());
+                }
             }
         };
 
@@ -164,6 +172,9 @@ public class Notepad implements EntryPoint {
             public void onSuccess(Note response) {
                 editor.setHTML(response.getContent());
                 showPopupAlert("Loaded!");
+                if (response.getLastModified() != null) {
+                    timestamp.setText("Last modified: " + response.getLastModifiedString());
+                }
             }
         };
 

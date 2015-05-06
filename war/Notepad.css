@@ -64,6 +64,15 @@ noscript div {
   border: 2px solid #AAAAAA !important;
 }
 
+.bottomPanel {
+  float: right;
+}
+
+.timestamp {
+  margin-top: 20px;
+  margin-right: 10px;
+}
+
 .buttonPanel {
   margin-top: 20px;
   text-align: right;
