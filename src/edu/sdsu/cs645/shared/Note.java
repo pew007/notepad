@@ -1,7 +1,5 @@
 package edu.sdsu.cs645.shared;
 
-import com.google.gwt.i18n.shared.DateTimeFormat;
-
 import java.io.Serializable;
 import java.util.Date;
 
