@@ -9,7 +9,7 @@ import java.io.*;
 @SuppressWarnings("serial")
 public class NotepadServiceImpl extends RemoteServiceServlet implements NotepadService {
 
-    private String filename = getServletContext().getRealPath("/") + "object.data";
+//    private String filename = getServletContext().getRealPath("/") + "object.data";
 //    private String filename = "/Users/pwang/CS645/Notepad/object.data";
 
     @Override
@@ -24,31 +24,31 @@ public class NotepadServiceImpl extends RemoteServiceServlet implements NotepadS
         note.setContent(content);
         note.updateLastModified();
 
-        try {
-            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename));
-            out.writeObject(note);
-            out.close();
-        } catch (Exception e) {
-            throw new IllegalArgumentException("Failed to save note. " + e.getMessage());
-        }
+//        try {
+//            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename));
+//            out.writeObject(note);
+//            out.close();
+//        } catch (Exception e) {
+//            throw new IllegalArgumentException("Failed to save note. " + e.getMessage());
+//        }
 
         return note;
     }
 
     @Override
     public Note load() throws IllegalArgumentException {
-System.out.print(filename);
-        Note note;
 
-        try {
-            FileInputStream fin = new FileInputStream(filename);
-            ObjectInputStream ois = new ObjectInputStream(fin);
-            note = (Note) ois.readObject();
-            fin.close();
-        } catch (Exception e) {
-            throw new IllegalArgumentException("Failed to load note. " + e.getMessage());
-        }
+//        Note note;
+//
+//        try {
+//            FileInputStream fin = new FileInputStream(filename);
+//            ObjectInputStream ois = new ObjectInputStream(fin);
+//            note = (Note) ois.readObject();
+//            fin.close();
+//        } catch (Exception e) {
+//            throw new IllegalArgumentException("Failed to load note. " + e.getMessage());
+//        }
 
-        return note;
+        return Note.getInstance();
     }
 }
